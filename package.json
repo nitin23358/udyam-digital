@@ -3,10 +3,12 @@
   "private": true,
   "version": "1.0.0",
   "description": "Accel Business · Udyam Digital — digital-first SMB acquisition & onboarding (YTL Hackathon 2026, Track A)",
+  "engines": { "node": ">=20" },
   "scripts": {
     "setup": "npm --prefix server install && npm --prefix client install",
     "dev": "node scripts/dev.mjs",
     "build": "npm --prefix client run build",
+    "build:host": "npm --prefix server ci && npm --prefix client ci --include=dev && npm --prefix client run build",
     "start": "npm run build && node server/src/index.js",
     "reset": "node scripts/reset.mjs"
   }

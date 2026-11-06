@@ -2,6 +2,7 @@ import 'dotenv/config';
 import crypto from 'crypto';
 import path from 'path';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
 import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
@@ -337,7 +338,7 @@ app.post('/api/leads/:id/suggest', wrap(async (req, res) => {
 app.use('/api/samples', express.static(KYC_DIR, { maxAge: '1h' }));
 
 // Serve the built client in production.
-const clientDist = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/(\w:)/, '$1')), '..', '..', 'client', 'dist');
+const clientDist = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'client', 'dist');
 if (fs.existsSync(clientDist)) {
   app.use(express.static(clientDist));
   app.get(/^(?!\/api).*/, (req, res) => res.sendFile(path.join(clientDist, 'index.html')));
@@ -345,7 +346,7 @@ if (fs.existsSync(clientDist)) {
 
 const PORT = Number(process.env.PORT) || 8787;
 await initDb();
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Udyam Digital API on http://localhost:${PORT}  (AI: ${llmInfo().provider}${llmInfo().model ? ' / ' + llmInfo().model : ''})`);
   warmUp();
   analytics();
