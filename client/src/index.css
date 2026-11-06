@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   Udyam Digital design system
+   Type scale: 12 / 13 / 14 / 16 / 20 / 28 / 40   ·   Spacing: 4px grid
+   One accent (brand red) for primary actions + selection only.
+   ------------------------------------------------------------------ */
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+  body { @apply bg-white text-ink font-sans text-[14px] leading-[1.55]; font-feature-settings: 'ss01', 'cv11'; }
+  h1, h2, h3, h4 { @apply text-ink tracking-[-0.015em]; }
+  ::selection { background: #FFD6D6; }
+  :focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(228, 0, 0, 0.22); border-radius: 8px; }
+  input, select, textarea, button { font: inherit; }
+}
+
+@layer components {
+  .num { font-variant-numeric: tabular-nums; }
+  .eyebrow { @apply text-2xs font-semibold uppercase tracking-[0.08em] text-ink-4; }
+
+  /* Buttons — one shape, three weights. */
+  .btn { @apply inline-flex items-center justify-center gap-2 h-10 px-4 rounded-[10px] text-[14px] font-semibold whitespace-nowrap transition-[background,color,box-shadow,transform] duration-150 select-none disabled:opacity-45 disabled:pointer-events-none active:translate-y-px; }
+  .btn-sm { @apply h-8 px-3 text-[13px] rounded-lg; }
+  .btn-lg { @apply h-12 px-5 text-[15px] rounded-xl; }
+  .btn-primary { @apply bg-brand-600 text-white hover:bg-brand-700 disabled:bg-[#E4E4EA] disabled:text-ink-4 disabled:shadow-none disabled:opacity-100 shadow-[0_1px_0_rgba(255,255,255,.15)_inset,0_1px_2px_rgba(154,0,0,.25)]; }
+  .btn-dark { @apply bg-ink text-white hover:bg-ink-2 disabled:bg-[#E4E4EA] disabled:text-ink-4 disabled:opacity-100; }
+  .btn-secondary { @apply bg-white text-ink border border-line hover:border-ink-4/50 hover:bg-canvas; }
+  .btn-ghost { @apply text-ink-3 hover:text-ink hover:bg-canvas; }
+
+  .card { @apply bg-white border border-line rounded-xl shadow-card; }
+  .card-pad { @apply p-5 sm:p-6; }
+  .divider { @apply border-t border-line; }
+
+  .field { @apply h-11 w-full rounded-[10px] border border-line bg-white px-3.5 text-[14px] text-ink placeholder:text-ink-4 transition-shadow focus:outline-none focus:border-brand-600/60 focus:shadow-focus; }
+  .label { @apply block text-[13px] font-medium text-ink-2 mb-1.5; }
+
+  /* Chips: selectable options in the advisor and filters. */
+  .chip { @apply inline-flex items-center gap-1.5 h-9 px-3.5 rounded-full border border-line bg-white text-[13px] font-medium text-ink-2 hover:border-ink-4/60 hover:text-ink transition-colors; }
+  .chip-on { @apply border-ink bg-ink text-white hover:text-white hover:border-ink; }
+
+  /* Status pills — the only place green/amber/red appear. */
+  .pill { @apply inline-flex items-center gap-1.5 h-6 px-2 rounded-md text-2xs font-semibold whitespace-nowrap; }
+  .pill-ok { @apply bg-ok-bg text-ok; }
+  .pill-warn { @apply bg-warn-bg text-warn; }
+  .pill-bad { @apply bg-bad-bg text-bad; }
+  .pill-neutral { @apply bg-canvas text-ink-3 border border-line; }
+  .pill-brand { @apply bg-brand-50 text-brand-700; }
+
+  .link { @apply text-brand-700 font-semibold hover:underline underline-offset-2; }
+
+  /* Console (dark sidebar, light content). */
+  .c-table th { @apply text-left text-2xs font-semibold uppercase tracking-[0.06em] text-ink-4 px-4 py-2.5 bg-canvas border-b border-line whitespace-nowrap; }
+  .c-table td { @apply px-4 py-3 border-b border-line-2 align-middle; }
+  .c-table tbody tr { @apply transition-colors; }
+}
+
+@layer utilities {
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-none { scrollbar-width: none; }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

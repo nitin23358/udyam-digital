@@ -1,0 +1,6 @@
+node_modules/
+client/dist/
+server/udyam.sqlite
+server/.tess-cache/
+server/.env
+*.log
